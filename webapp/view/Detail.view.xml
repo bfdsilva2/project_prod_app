@@ -1,0 +1,177 @@
+<mvc:View
+		controllerName="namespace1.projectprodapp.controller.Detail"
+		xmlns:mvc="sap.ui.core.mvc"
+		xmlns="sap.m"
+		xmlns:f="sap.f"
+		xmlns:layout="sap.ui.layout"
+		height="100%">
+
+		<f:DynamicPage id="page"
+			stickySubheaderProvider="iconTabBar"
+			class="sapUiNoContentPadding"
+			toggleHeaderOnTitleClick="{/titleClickable}">
+			<!-- DynamicPage Title -->
+			<f:title>
+				<f:DynamicPageTitle>
+					<f:heading>
+						<Title text="{ProductName}"/>
+					</f:heading>
+					<f:expandedContent>
+						<Label text="{ProductID}"/>
+					</f:expandedContent>					
+					
+					<f:actions>						
+
+                        <Button
+                            text="Marcar como descontinuado"
+                            press=".onShowMarkAsDescontinued"
+                            width="250px"
+                            class="sapUiSmallMarginBottom"
+                            ariaHasPopup="Dialog" 
+                            enabled="{= (${Discontinued} === true) ? false : true}"
+                            />
+					</f:actions>
+					<f:navigationActions>
+						<Button icon="sap-icon://full-screen" type="Transparent" />
+						<Button icon="sap-icon://decline" type="Transparent" />
+					</f:navigationActions>
+				</f:DynamicPageTitle>
+			</f:title>
+			<!-- DynamicPage Header -->
+			<f:header>
+				<f:DynamicPageHeader pinnable="true">
+					<layout:HorizontalLayout allowWrapping="true">
+                        <layout:VerticalLayout class="sapUiResponsiveContentPadding">
+							<ObjectAttribute text="{QuantityPerUnit}"/>							
+						</layout:VerticalLayout>
+                        <layout:VerticalLayout class="sapUiResponsiveContentPadding">							
+							<ObjectAttribute text="Category Name"/>																
+						</layout:VerticalLayout>                        
+
+                        <layout:VerticalLayout class="sapUiResponsiveContentPadding">							
+							<ObjectAttribute text="Category Description"/>																
+						</layout:VerticalLayout>
+
+                        <layout:VerticalLayout class="sapUiResponsiveContentPadding">							
+							<ObjectAttribute title="Estado" text="{= (${Discontinued} === true) ? 'Descontinuado' : 'LineUp'}"/>																
+						</layout:VerticalLayout>
+
+                        <layout:VerticalLayout class="sapUiResponsiveContentPadding">							
+							<ObjectAttribute title="Unidades em Encomenda" text="{UnitsOnOrder}"/>																
+						</layout:VerticalLayout>
+
+                        <layout:VerticalLayout class="sapUiResponsiveContentPadding">							
+							<ObjectAttribute title="Unidades em Estoque" text="{UnitsInStock}"/>																
+						</layout:VerticalLayout>                        
+			  
+					</layout:HorizontalLayout>
+				</f:DynamicPageHeader>
+			</f:header>
+			<f:content>                
+				<IconTabBar id="iconTabBar" class="sapUiResponsiveContentPadding">                                                
+					<items>
+						<IconTabFilter text="Order Details">
+							<Table id="Order_Details"
+								inset="true"
+								sticky="HeaderToolbar,ColumnHeaders"
+								items="{path: 'Order_Details'}"
+								class="sapUiSmallNegativeMarginBeginEnd"
+								width="auto">								
+								<columns>
+									<Column width="12em">
+										<Text text="Produto" />
+									</Column>
+									<Column hAlign="End">
+										<Text text="Quantidade" />
+									</Column>									
+									<Column hAlign="End">
+										<Text text="Preço" />
+									</Column>
+                                    <Column hAlign="End">
+										<Text text="Desconto" />
+									</Column>
+								</columns>
+								<items>
+									<ColumnListItem>
+										<cells>
+                                            <Text text="{ProductID}" />
+											<Text text="{Quantity}" />
+											<Text text="{UnitPrice}" />
+                                            <Text text="{Discount}" />										
+										</cells>
+									</ColumnListItem>
+								</items>
+							</Table>
+						</IconTabFilter>
+					</items>
+
+                    <items>    
+                        <IconTabFilter text="Supplier Info">
+							<Table id="Supplier"
+								inset="false"
+								sticky="HeaderToolbar,ColumnHeaders"
+								items="{path: 'Supplier'}"
+								class="sapUiSmallNegativeMarginBeginEnd"
+								width="auto">								
+								<columns>
+									<Column width="18em">
+										<Text text="Company" />
+									</Column>
+									<Column width="8em">
+										<Text text="Contact" />
+									</Column>
+                                    <Column width="8em">
+										<Text text="Contact Title" />
+									</Column>
+                                    <Column width="12em">
+										<Text text="Address" />
+									</Column>
+                                    <Column width="12em">
+										<Text text="City" />
+									</Column>
+                                    <Column width="8em">
+										<Text text="Region" />
+									</Column>
+                                    <Column width="8em">
+										<Text text="PostalCode" />
+									</Column>
+                                    <Column width="8em">
+										<Text text="Phone" />
+									</Column>
+								</columns>
+								<items>
+									<ColumnListItem>
+										<cells>
+                                            <Text text="{CompanyName}" />
+											<Text text="{ContactName}" />
+                                            <Text text="{ContactTitle}" />
+                                            <Text text="{Address}" />
+                                            <Text text="{City}" />
+                                            <Text text="{Region}" />
+                                            <Text text="{PostalCode}" />
+                                            <Text text="{Phone}" />                                      
+										</cells>
+									</ColumnListItem>
+								</items>
+							</Table>
+						</IconTabFilter>
+					</items>
+				</IconTabBar>
+			</f:content>
+			<!-- DynamicPage Footer -->
+			<f:footer>
+				<OverflowToolbar>
+					<Button icon="sap-icon://message-popup"
+						text="{/messagesLength}"
+						type="Emphasized"
+						press="onMessageButtonPress"
+						visible="{= !!${/messagesLength}}"/>
+					<ToolbarSpacer/>
+					<Button type="Accept" text="Accept"/>
+					<Button type="Reject" text="Reject"/>
+				</OverflowToolbar>
+			</f:footer>
+		</f:DynamicPage>
+</mvc:View>
+
+

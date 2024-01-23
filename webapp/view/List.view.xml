@@ -1,0 +1,79 @@
+<mvc:View
+	controllerName="namespace1.projectprodapp.controller.List"
+	xmlns="sap.ui.table"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:u="sap.ui.unified"
+	xmlns:c="sap.ui.core"
+	xmlns:m="sap.m"
+    height="100%">
+	<m:Page
+		showHeader="false"
+		enableScrolling="false"
+		class="sapUiContentPadding"
+        title="{i18n>Listtitle}">
+		<m:content>
+			<Table
+                id="table"
+				rows="{/Products}"
+				selectionMode= "Single"
+				paste="onPaste"
+				ariaLabelledBy="title"
+                alternateRowColors="true">
+				<extension>
+					<m:OverflowToolbar style="Clear">
+						<m:Title id="title" text="Products"/>
+					</m:OverflowToolbar>                    
+				</extension>
+                
+                <rowSettingsTemplate>					
+                    <RowSettings highlight="{= (${Discontinued} === true) ? 'Error' : 'Success'}" />
+				</rowSettingsTemplate>
+
+				<columns>
+                    <Column width="7rem">
+						<m:Label text="Product Id" />
+						<template>
+							<m:Text text="{ProductID}" wrapping="false" />							
+						</template>
+					</Column>
+
+					<Column width="20rem">
+						<m:Label text="Produto" />
+						<template>
+							<m:Text text="{ProductName}" wrapping="false" />
+						</template>
+					</Column>
+					
+                    <Column width="15rem" hAlign="End">
+						<m:Label text="Quantidade por caixa" />
+						<template>
+							<m:Text text="{QuantityPerUnit}" />
+						</template>
+					</Column>
+
+					<Column width="10rem" hAlign="End">
+						<m:Label text="Quantidade" />
+						<template>
+							<m:Text text="{UnitsInStock}" />
+						</template>
+					</Column>					
+														
+					<Column width="9rem">
+						<m:Label text="Detalhes" />
+						<template>
+							<m:Button text="Mostrar Detalhes" press="ohandle_press"/>
+						</template>
+					</Column>					
+																				
+				</columns>
+			</Table>
+
+		</m:content>
+        
+
+
+
+	</m:Page>
+</mvc:View>
+
+
